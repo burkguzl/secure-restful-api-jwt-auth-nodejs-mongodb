@@ -39,9 +39,7 @@ router.post('/users/me/logout', auth, async (req, res, next) => {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token != req.token
         })
-        console.log(req.user);
         await req.user.save();
-        console.log(req.user);
         res.send();
 
     } catch (err) {
@@ -51,11 +49,9 @@ router.post('/users/me/logout', auth, async (req, res, next) => {
 
 //logout by all tokens (devices)
 router.post('/users/me/logoutall', auth, async (req, res, next) => {
-    console.log('DSadsdsadsadsadsad');
     try {
         req.user.tokens.splice(0, req.user.tokens.length);
         await req.user.save();
-        console.log(req.user);
         res.send();
     } catch (err) {
         res.status(500).send(err);
